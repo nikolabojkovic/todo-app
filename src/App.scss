@@ -1,0 +1,120 @@
+@import "~bootstrap/scss/bootstrap";
+
+.App {
+  text-align: center;
+  padding-bottom: 50px;
+  background-color: #282c34;
+
+  &-header {
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  &-link {
+    color: #61dafb;
+  }
+
+  &__todo-list {
+    background-color: #282C34;
+    max-width: 650px;
+    margin: auto;
+
+    &__item {
+      background-color: #444444;
+      margin: 2px 0px;
+      padding: 0px 15px;
+
+      &-title {
+        color: #FE9801;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: left;
+        text-decoration: none;
+  
+        &--completed {
+          color: #767470;
+          font-weight: bold;
+          font-size: 24px;
+          text-align: left;      
+          text-decoration: line-through;
+        }
+      }
+  
+      &-description {
+        color: #A4A7AA;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: left;
+  
+        &--compleated {
+          color: #767470;
+          font-size: 12px;
+          text-decoration: line-through;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .paging-container {
+    color: #A4A7AA;
+    background-color: #444444;
+    padding: 10px 10px;
+  }
+
+  button:hover {
+    color: #282C34;
+  }
+
+  .add-todo {
+    background-color: #444444;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: 282c34;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7e7d7d;
+  border-radius: 10px;
+  border: 2px solid #282c34;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* bootsrap override */
+.page-link.active, .active > .page-link {
+  background-color: #FE9801;
+  border-color: #FE9801;
+}
+
+.page-link {
+  color: #A4A7AA;
+
+  &:hover {
+    color: #767470;
+  }
+}
