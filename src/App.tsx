@@ -1,5 +1,6 @@
 import './App.scss';
 import { TodoList } from './components/TodoList';
+import { TodoListProvider } from './context/TodosContext';
 
 function App() {
   return (
@@ -7,7 +8,9 @@ function App() {
       <header className="App-header">
         Todo List
       </header>
-      <TodoList/>
+      <TodoListProvider>
+        <TodoList/>
+      </TodoListProvider>
     </div>
   );
 }

@@ -5,3 +5,16 @@ export interface Todo {
 	completed: boolean;
 	createdAt: Date;
 }
+
+export interface Paging {
+	totalCount: number;
+	activePage: number;
+	itemsPerPage: number;
+	startIndex: number;
+	endIndex: number;
+}
+
+export interface TodoList {
+	todos: Todo[];
+	paging: Paging;
+}

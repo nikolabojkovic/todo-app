@@ -1,4 +1,5 @@
 import { Button, Stack } from 'react-bootstrap';
+import { useTodoListDispatch } from '../context/TodosContext';
 import { Todo } from '../models/todo';
 
 const buttonStyle : any = { 
@@ -9,11 +10,11 @@ const buttonStyle : any = {
 
 type Props = {
   todo: Todo;
-  onDelete: any;
-  onComplete: any
 };
 
-export function TodoItem({ todo, onDelete, onComplete }: Props){
+export function TodoItem({ todo }: Props){
+
+  const dispatch = useTodoListDispatch();
 
   return (
       <div className="App__todo-list__item">
@@ -40,7 +41,12 @@ export function TodoItem({ todo, onDelete, onComplete }: Props){
               variant="outline-success" 
               size="sm"
               style={ buttonStyle }
-              onClick={() => onComplete(todo.id)}
+              onClick={() => {
+                dispatch({
+                  type: 'changed',
+                  todo: {...todo, completed: true}
+                });
+              }}
             >
               Complete
             </Button>
@@ -50,7 +56,12 @@ export function TodoItem({ todo, onDelete, onComplete }: Props){
             variant="outline-danger" 
             size="sm" 
             style={ buttonStyle }
-            onClick={() => onDelete(todo.id)}
+            onClick={() => {
+              dispatch({
+                type: 'deleted',
+                id: todo.id
+              });
+            }}
           >
             Delete
           </Button>

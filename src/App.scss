@@ -71,7 +71,7 @@
     color: #282C34;
   }
 
-  .add-todo {
+  .todo-background {
     background-color: #444444;
   }
 }
@@ -108,13 +108,26 @@
 /* bootsrap override */
 .page-link.active, .active > .page-link {
   background-color: #FE9801;
-  border-color: #FE9801;
+  border-color: #303030;
+  
+  &:hover {
+    color: white;
+  }
 }
 
 .page-link {
-  color: #A4A7AA;
+  color: #e3e3e4;
+  background-color: #6f6f6f;
+  border-color: #303030;
 
   &:hover {
     color: #767470;
   }
+}
+
+.form-select {
+  background-color: #6f6f6f;
+  border-color: #303030;
+  color: #e3e3e4;
+  cursor: pointer;
 }
