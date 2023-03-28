@@ -1,33 +1,44 @@
 import { Button, Form, Stack } from 'react-bootstrap';
-import { useState } from 'react';
+import { useTodoList, useTodoListDispatch } from '../context/TodosContext';
 
 type Props = {
-  placeholder: string,
-  onSearch: any
+  placeholder: string
 };
 
+export function Search({ placeholder }: Props) {
+  const dispatch = useTodoListDispatch();
+  const todoList = useTodoList();
 
-export function Search({ onSearch, placeholder }: Props) {
-  const [searchTerm, setSearchTerm] = useState('');
+  function searchTodos(searchTerm: string) {
+    dispatch({
+      type: 'searched',
+      searchTerm,
+      activePage: 1,
+    });
+  }
 
   return (
-    <Form className="todo-background mb-3 p-3">
+    <Form className="todo-background p-1">
       <Stack direction="horizontal" gap={3}>       
         <Form.Control 
           type="text" 
           placeholder={placeholder} 
           size="sm" 
-          className="me-auto"
-          value={searchTerm}
+          className="me-auto m-2"
+          value={todoList.search.searchTerm}
           onChange={(e) => { 
-            setSearchTerm(e.target.value);
+            dispatch({
+              type: 'searchTerm-updated',
+              searchTerm: e.target.value
+            })
             if (e.target.value === '') {
-              onSearch(e.target.value);
+              searchTodos(e.target.value);
             }
           }}
           />
           <Button 
             variant="warning"
+            className="m-2"
             style={{ 
               backgroundColor: '#FE9801',
               color: 'white', 
@@ -35,9 +46,9 @@ export function Search({ onSearch, placeholder }: Props) {
               borderRadius: '20px'
             }} 
             size="sm"
-            disabled={!searchTerm || searchTerm.trim() === ''}
+            disabled={!todoList.search.searchTerm || todoList.search.searchTerm.trim() === ''}
             onClick={() => {
-              onSearch(searchTerm);
+              searchTodos(todoList.search.searchTerm);
             }}
           >
             Search

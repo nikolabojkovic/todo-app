@@ -15,6 +15,9 @@ export interface Paging {
 }
 
 export interface TodoList {
-	todos: Todo[];
+	originalList: Todo[];
+	displayList: Todo[];
+	search: any;
+	filter: any;
 	paging: Paging;
 }

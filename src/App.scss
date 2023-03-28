@@ -1,9 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./style/bootstrap-override.scss";
+@import "./style/variables.scss";
 
 .App {
   text-align: center;
   padding-bottom: 50px;
-  background-color: #282c34;
+  background-color: $background-primary-color;
 
   &-header {
     min-height: 10vh;
@@ -12,48 +14,44 @@
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
-  }
-
-  &-link {
-    color: #61dafb;
+    color: $text-primary-color;
   }
 
   &__todo-list {
-    background-color: #282C34;
+    background-color: $background-primary-color;
     max-width: 650px;
     margin: auto;
 
     &__item {
-      background-color: #444444;
+      background-color: $background-secondary-color;
       margin: 2px 0px;
       padding: 0px 15px;
 
       &-title {
-        color: #FE9801;
+        color: $text-secondary-color;
         font-weight: bold;
-        font-size: 24px;
+        font-size: $font-size-primary;
         text-align: left;
         text-decoration: none;
   
         &--completed {
-          color: #767470;
+          color: $text-ternary-color;
           font-weight: bold;
-          font-size: 24px;
+          font-size: $font-size-primary;
           text-align: left;      
           text-decoration: line-through;
         }
       }
   
       &-description {
-        color: #A4A7AA;
-        font-size: 12px;
+        color: $text-ternary-color-2;
+        font-size: $font-size-secondary;
         text-decoration: none;
         text-align: left;
   
         &--compleated {
-          color: #767470;
-          font-size: 12px;
+          color: $text-ternary-color;
+          font-size: $font-size-secondary;
           text-decoration: line-through;
           text-align: left;
         }
@@ -61,73 +59,65 @@
     }
   }
 
+  &__tabs {
+    &-content {
+      position: relative;
+      background-color: $background-secondary-color;
+    }
+
+    &__item {
+      padding: 5px 10px;
+      cursor: default;
+      background-color: $background-secondary-color;
+
+      .svg-inline--fa {
+        color: $text-secondary-color;
+      }
+
+      &--inactive {
+        cursor: pointer;
+        background-color: $background-ternary-color;
+
+        .svg-inline--fa {
+          color: $text-primary-color
+        }
+      }
+    }
+  }
+
+  &__filter {
+    height: 55px;
+    padding: 15px;
+  }
+
   .paging-container {
-    color: #A4A7AA;
-    background-color: #444444;
+    color: $text-ternary-color-2;
+    background-color: $background-secondary-color;
     padding: 10px 10px;
   }
 
   button:hover {
-    color: #282C34;
+    color: $background-primary-color;
   }
 
   .todo-background {
-    background-color: #444444;
+    background-color: $background-secondary-color;
   }
-}
 
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: 282c34;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #7e7d7d;
-  border-radius: 10px;
-  border: 2px solid #282c34;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .fade-in {
+    opacity: 0;
+    animation-name: fade-in;
+    animation-duration: 0.5s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* bootsrap override */
-.page-link.active, .active > .page-link {
-  background-color: #FE9801;
-  border-color: #303030;
-  
-  &:hover {
-    color: white;
-  }
-}
-
-.page-link {
-  color: #e3e3e4;
-  background-color: #6f6f6f;
-  border-color: #303030;
-
-  &:hover {
-    color: #767470;
-  }
-}
-
-.form-select {
-  background-color: #6f6f6f;
-  border-color: #303030;
-  color: #e3e3e4;
-  cursor: pointer;
 }
