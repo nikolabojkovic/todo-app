@@ -49,22 +49,24 @@
 
 .form-check-input {
   box-shadow: none;
-  border-color: $text-secondary-color;
+  border-color: $background-primary-color;
+  background-color: $background-ternary-color-1;
+  background-image: escape-svg($form-switch-checked-bg-image);
 
   &:focus {
-    border-color: $text-secondary-color;
-    background-image: escape-svg($form-switch-bg-image);
+    border-color: $background-primary-color;
+    background-image: escape-svg($form-switch-checked-bg-image);
     box-shadow: none;
   }
 
   &:checked {
     background-color: $text-secondary-color;
-    border-color: $text-secondary-color;
+    border-color: $background-primary-color;
     box-shadow: none;
     background-image: escape-svg($form-switch-checked-bg-image) !important;
   }
 }
 
-.form-switch .form-check-input:focus {
-  background-image: escape-svg($form-switch-bg-image);
+.form-switch .form-check-input, .form-switch .form-check-input:focus {
+  background-image: escape-svg($form-switch-checked-bg-image);
 }
