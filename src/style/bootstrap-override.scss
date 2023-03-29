@@ -1,6 +1,8 @@
+@import "./variables.scss";
+
 /* bootsrap override */
 .page-link.active, .active > .page-link {
-  background-color: #FE9801;
+  background-color: $text-secondary-color;
   border-color: #303030;
   cursor: default;
   
@@ -43,4 +45,26 @@
     border: none;
     box-shadow: none;
   }
+}
+
+.form-check-input {
+  box-shadow: none;
+  border-color: $text-secondary-color;
+
+  &:focus {
+    border-color: $text-secondary-color;
+    background-image: escape-svg($form-switch-bg-image);
+    box-shadow: none;
+  }
+
+  &:checked {
+    background-color: $text-secondary-color;
+    border-color: $text-secondary-color;
+    box-shadow: none;
+    background-image: escape-svg($form-switch-checked-bg-image) !important;
+  }
+}
+
+.form-switch .form-check-input:focus {
+  background-image: escape-svg($form-switch-bg-image);
 }
