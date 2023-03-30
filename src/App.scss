@@ -13,7 +13,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    font-size: 24px;
+    font-size: bold;
+    font-style: italic;
     color: $text-primary-color;
   }
 

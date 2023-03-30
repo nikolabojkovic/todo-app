@@ -226,7 +226,7 @@ function filter(list: Todo[], filter: any = null) {
 
 function sort(list: Todo[], sort: any) {
   let sortResult = [];
- console.log(sort);
+  
   if (sort.column === 'createdAt') {
     if (sort.direction === 'asc') {
       sortResult = [...list.sort((a: any, b: any) => Date.parse(a[sort.column]) > Date.parse(b[sort.column]) ? 1 : -1)]
