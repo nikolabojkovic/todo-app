@@ -27,6 +27,10 @@
       margin: 2px 0px;
       padding: 0px 15px;
 
+      &:hover {
+        background-color: $background-secondary-color-1;
+      }
+
       &-title {
         color: $text-secondary-color;
         font-weight: bold;

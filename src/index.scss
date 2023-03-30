@@ -1,7 +1,7 @@
 @import "./style/variables.scss";
 
 html {
-  background-color: #282c34;
+  background-color: $background-primary-color;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 }
 
 section { 
-  color: white;
+  color: $text-primary-color;
 }
 
 ul {
