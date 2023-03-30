@@ -90,6 +90,37 @@
     padding: 15px;
   }
 
+  &__sorting {
+    padding: 5px 15px;
+    margin: 10px 0px 5px 0px;
+    background-color: $background-secondary-color;
+
+    &__item {
+      user-select: none;
+      cursor: pointer;
+      margin-right: 20px;
+      margin-bottom: 2px;
+      margin-top: 2px;
+      background-color: $background-ternary-color-2;
+      border-radius: 5px;
+      padding: 0px 5px;
+
+      &__icon-up {
+        left: 7px;
+        position: relative;
+      }
+
+      &__icon-down {
+        right: 3px;
+        position: relative;
+      }
+
+      .icon--inactive {
+        color: $background-ternary-color;
+      }
+    }
+  }
+
   .paging-container {
     color: $text-ternary-color-2;
     background-color: $background-secondary-color;

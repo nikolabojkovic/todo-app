@@ -11,7 +11,12 @@ function getTodos() {
     return initTodoList;
   }
     
-  const todos = JSON.parse(localStorage.getItem('todo-list') ?? "[]") as Todo[];
+  const sortBy = {
+    column: 'createdAt',
+    direction: 'asc'
+  };
+  const todos = sort(JSON.parse(localStorage.getItem('todo-list') ?? "[]") as Todo[], sortBy);
+
   let todoList = {
     originalList: todos, 
     displayList: todos,
@@ -22,6 +27,7 @@ function getTodos() {
       completed: false,
       uncompleted: false,
     },
+    sort: sortBy,
     paging: {
       totalCount: todos.length,
       activePage: todos.length > 0 ? 1 : 0,
@@ -164,6 +170,18 @@ function todoListReducer(todoList: TodoList, action: any) {
         } as Paging
       }
     }
+    case 'sorted': {
+      const filteredList = filter(todoList.originalList, todoList.filter);
+      const searchedList = search(filteredList, todoList.search.searchTerm);
+      const sortedList = sort(searchedList, action.sort);
+
+      return {
+        ...todoList,
+        displayList: [...sortedList],
+        sort: {...action.sort},
+        paging: {...todoList.paging} as Paging
+      }
+    }
     default: {
       throw Error('Unknown action: ' + action.type);
     }
@@ -204,6 +222,28 @@ function filter(list: Todo[], filter: any = null) {
   }
 
   return filteredList;
+}
+
+function sort(list: Todo[], sort: any) {
+  let sortResult = [];
+ console.log(sort);
+  if (sort.column === 'createdAt') {
+    if (sort.direction === 'asc') {
+      sortResult = [...list.sort((a: any, b: any) => Date.parse(a[sort.column]) > Date.parse(b[sort.column]) ? 1 : -1)]
+    } else {
+      sortResult = [...list.sort((a: any, b: any) => Date.parse(a[sort.column]) < Date.parse(b[sort.column]) ? 1 : -1)]
+    }
+
+    return sortResult;
+  }
+
+  if (sort.direction === 'asc') {
+    sortResult = [...list.sort((a: any, b: any) => a[sort.column] > b[sort.column] ? 1 : -1)]
+  } else {
+    sortResult = [...list.sort((a: any, b: any) => a[sort.column] < b[sort.column] ? 1 : -1)]
+  }
+
+  return sortResult;
 }
 
 function calculateActivePageOnDelete(paging: Paging) {

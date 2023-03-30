@@ -20,7 +20,7 @@
 
 .page-link {
   color: #e3e3e4;
-  background-color: #6f6f6f;
+  background-color: $background-ternary-color-2;
   border-color: #303030;
 
   &:hover {
@@ -34,7 +34,7 @@
 }
 
 .form-select {
-  background-color: #6f6f6f;
+  background-color: $background-ternary-color-2;
   border-color: #303030;
   color: #e3e3e4;
   cursor: pointer;
@@ -44,6 +44,14 @@
   &:focus {
     border: none;
     box-shadow: none;
+  }
+}
+
+.form-control {
+  &:focus {
+    border-color: $text-secondary-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem $text-secondary-color;
   }
 }
 

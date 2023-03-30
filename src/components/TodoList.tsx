@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Todo } from "../models/todo";
 import { AddTodo } from './AddTodo';
 import { TodoItem } from './TodoItem';
 import { Paging } from './Paging';
 import { Search } from './Search';
 import { useTodoList } from '../context/TodosContext';
-import { TodoTabs } from './TodoTabs';
+import { Tabs } from './Tabs';
 import { FilterTodos } from './FilterTodos';
+import { Sorting } from './Sorting';
 
 export function TodoList() {
   const todoList = useTodoList();
@@ -18,14 +19,15 @@ export function TodoList() {
 
   return (
     <main className="App__todo-list">
-      <TodoTabs>
+      <Tabs>
         <AddTodo key="add-todo" />
         <Search 
           key="search-todos" 
           placeholder='Search by title or description' 
         />
         <FilterTodos key="filter-todos" />
-      </TodoTabs>
+      </Tabs>
+      <Sorting/>
       {todoList.displayList
         .slice(todoList.paging.startIndex, todoList.paging.endIndex)
         .map((todo: Todo) => <TodoItem key={todo.id} todo={todo} />)}

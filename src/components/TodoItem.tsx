@@ -32,7 +32,9 @@ export function TodoItem({ todo }: Props){
                 : "App__todo-list__item-description"
               }>
                 <span>{todo.description}</span>
-                <span>{' '}{new Date(todo.createdAt).toLocaleDateString()}</span>
+                <span>
+                  {' ' + new Date(todo.createdAt).toDateString() + ' '}
+                </span>
             </div>
           </div>     
           { !todo.completed &&

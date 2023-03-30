@@ -3,7 +3,7 @@ import { faSearch, faAdd, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { Stack } from "react-bootstrap";
 import { useState } from "react";
 
-export function TodoTabs({ children }: any) {
+export function Tabs({ children }: any) {
   const [active, setActive] = useState('add-todo');
   const activeChild = children.find((item: any) => item.key === active);
   const tabs = [{

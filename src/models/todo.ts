@@ -19,5 +19,6 @@ export interface TodoList {
 	displayList: Todo[];
 	search: any;
 	filter: any;
+	sort: any;
 	paging: Paging;
 }

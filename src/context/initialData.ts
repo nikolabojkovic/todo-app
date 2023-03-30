@@ -51,6 +51,7 @@ export const initTodoList: TodoList =
   displayList: data,
   search: { searchTerm: '' },
   filter: { completed: false, uncompleted: false },
+  sort: { column: 'createdAt', direction: 'asc'},
   paging: {
     totalCount: 6,
     activePage: 1,
