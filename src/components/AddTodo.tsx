@@ -43,7 +43,8 @@ export function AddTodo() {
                 backgroundColor: '#FE9801',
                 color: 'white', 
                 minWidth: '90px',
-                borderRadius: '20px'
+                borderRadius: '20px',
+                width: '100%'
               }} 
               size="sm"
               disabled={!title || title.trim() === '' || !description || description.trim() === ''}

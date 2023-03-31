@@ -11,7 +11,7 @@ const sortByColumns = [
   },
   {
     name: 'createdAt',
-    text: 'Created at'
+    text: 'Date'
   },
   {
     name: 'completed',
