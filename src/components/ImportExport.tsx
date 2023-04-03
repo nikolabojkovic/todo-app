@@ -1,10 +1,9 @@
 import { faFileExport, faFileImport } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
-import { Button, Col, Container, Form, InputGroup, Row, Stack } from "react-bootstrap";
-import { fileURLToPath } from "url";
+import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { useTodoList, useTodoListDispatch } from "../context/TodosContext";
-import { ITodo, Todo } from "../models/Todo";
+import { Todo } from "../models/Todo";
 
 const buttonStyle : any = { 
   backgroundColor: '#F5F6F7', 
@@ -24,39 +23,44 @@ export function ImportExport() {
   function handleImport(e: any) {
     e.preventDefault();
 
-    if (file) {
-      fileReader.onload = function (e: any) {
-        const text = e.target.result;
-        const list = JSON.parse(text) as Todo[];
+    if (!file) 
+      return;
 
-        if (!(list instanceof Array)) {
-          alert("Invalid JSON file content. Todo list should be an array.");
-          return;
-        }
+    fileReader.onload = function (e: any) {
+      const text = e.target.result;
+      const list = JSON.parse(text) as Todo[];
 
-        const importedTodoList = list.map((item: any) => 
-          new Todo(item.id, item.title, item.description, item.completed, item.createdAt));
+      if (!(list instanceof Array)) {
+        alert("Invalid JSON file content. Todo list should be an array.");
+        return;
+      }
 
-        if ((importedTodoList.length > 0 
-            && (!(importedTodoList[0] instanceof Todo) 
-                || !(Todo.validateFields(importedTodoList[0]))
-               )
-            )) {
-          alert("Invalid JSON file content. Object in array are not valid Todo objects.");
-          return;
-        }
-        
-        dispatch({
-          type: 'imported',
-          originalList: importedTodoList,
-          activePage: 1
-        });
-        setFile(null);
-        fileRef.current.value = '';
-      };
+      const importedTodoList = list.map((item: any) => 
+        new Todo(item.id, 
+          item.title, 
+          item.description, 
+          item.completed, 
+          item.createdAt));
 
-      fileReader.readAsText(file);
-    }
+      if ((importedTodoList.length > 0 
+          && (!(importedTodoList[0] instanceof Todo) 
+              || !(Todo.validateFields(importedTodoList[0]))
+              )
+          )) {
+        alert("Invalid JSON file content. Object in array are not valid Todo objects.");
+        return;
+      }
+            
+      setFile(null);
+      dispatch({
+        type: 'imported',
+        originalList: importedTodoList,
+        activePage: 1
+      });
+      fileRef.current.value = '';
+    };
+
+    fileReader.readAsText(file);
   };
 
   return (
@@ -103,7 +107,7 @@ export function ImportExport() {
                   JSON.stringify(todoList.originalList)
                 )}`;
                 link.href = jsonContent;
-                link.download = "todo-list.json";
+                link.download = `todo-list-${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}.json`;
                 link.click();
                 console.log("export");
               }}
