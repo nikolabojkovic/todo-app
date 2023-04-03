@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faAdd, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faAdd, faFilter, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Stack } from "react-bootstrap";
 import { useState } from "react";
 
@@ -17,6 +17,10 @@ export function Tabs({ children }: any) {
   {
     name: 'filter-todos',
     icon: faFilter
+  },
+  {
+    name: 'import-export',
+    icon: faDownload
   }
 ];
 

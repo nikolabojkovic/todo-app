@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Todo } from "../models/todo";
 import { AddTodo } from './AddTodo';
 import { TodoItem } from './TodoItem';
 import { Paging } from './Paging';
@@ -8,6 +7,8 @@ import { useTodoList } from '../context/TodosContext';
 import { Tabs } from './Tabs';
 import { FilterTodos } from './FilterTodos';
 import { Sorting } from './Sorting';
+import { ImportExport } from './ImportExport';
+import { ITodo } from '../models/Todo';
 
 export function TodoList() {
   const todoList = useTodoList();
@@ -26,11 +27,12 @@ export function TodoList() {
           placeholder='Search by title or description' 
         />
         <FilterTodos key="filter-todos" />
+        <ImportExport key="import-export" />
       </Tabs>
       <Sorting/>
       {todoList.displayList
         .slice(todoList.paging.startIndex, todoList.paging.endIndex)
-        .map((todo: Todo) => <TodoItem key={todo.id} todo={todo} />)}
+        .map((todo: ITodo) => <TodoItem key={todo.id} todo={todo} />)}
       <Paging/>
     </main>
   );

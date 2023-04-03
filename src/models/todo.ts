@@ -1,4 +1,4 @@
-export interface Todo {
+export interface ITodo {
 	id: number;
 	title: string;
 	description: string;
@@ -6,19 +6,28 @@ export interface Todo {
 	createdAt: Date;
 }
 
-export interface Paging {
-	totalCount: number;
-	activePage: number;
-	itemsPerPage: number;
-	startIndex: number;
-	endIndex: number;
+export class Todo implements ITodo {	
+	id: number;
+	title: string;
+	description: string;
+	completed: boolean;
+	createdAt: Date;
+
+	constructor(id: number, title: string, description: string, completed: boolean, createdAt: Date | string) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.completed = completed;
+		this.createdAt = createdAt instanceof Date ? createdAt : new Date(Date.parse(createdAt));
+	}
+
+	public static validateFields(todo: Todo) {
+		return todo.id !== undefined
+			&& todo.title !== undefined
+			&& todo.description !== undefined
+			&& todo.completed !== undefined
+			&& todo.createdAt !== undefined
+	}
 }
 
-export interface TodoList {
-	originalList: Todo[];
-	displayList: Todo[];
-	search: any;
-	filter: any;
-	sort: any;
-	paging: Paging;
-}
+

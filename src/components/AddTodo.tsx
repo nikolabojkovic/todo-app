@@ -1,7 +1,7 @@
 import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap';
 import { useState } from 'react';
 import { useTodoList, useTodoListDispatch } from '../context/TodosContext';
-import { Todo } from '../models/todo';
+import { ITodo } from '../models/Todo';
 
 export function AddTodo() {
   const [title, setTitle] = useState('');
@@ -11,7 +11,7 @@ export function AddTodo() {
   const dispatch = useTodoListDispatch();
   const id = todoList.originalList.length >= 1 
     ? todoList.originalList
-        .sort((a: Todo, b: Todo) => a.id > b.id ? 1 : -1)[todoList.originalList.length - 1].id 
+        .sort((a: ITodo, b: ITodo) => a.id > b.id ? 1 : -1)[todoList.originalList.length - 1].id 
     : 0;
 
   return (

@@ -1,6 +1,6 @@
 import { Button, Stack } from 'react-bootstrap';
 import { useTodoListDispatch } from '../context/TodosContext';
-import { Todo } from '../models/todo';
+import { ITodo } from '../models/Todo';
 
 const buttonStyle : any = { 
   backgroundColor: '#F5F6F7', 
@@ -9,7 +9,7 @@ const buttonStyle : any = {
 }
 
 type Props = {
-  todo: Todo;
+  todo: ITodo;
 };
 
 export function TodoItem({ todo }: Props){

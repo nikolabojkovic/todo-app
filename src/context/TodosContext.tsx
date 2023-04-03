@@ -1,8 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
-import { Paging, Todo, TodoList } from "../models/todo";
+import { IPaging } from "../models/IPaging";
+import { ITodoList } from "../models/ITodoList";
+import { ITodo } from "../models/Todo";
 import { initTodoList } from "./initialData";
  
-export const TodosContext = createContext({} as TodoList);
+export const TodosContext = createContext({} as ITodoList);
 export const TodosDispatchContext = createContext(null as any);
 
 function getTodos() {
@@ -15,7 +17,7 @@ function getTodos() {
     column: 'createdAt',
     direction: 'asc'
   };
-  const todos = sort(JSON.parse(localStorage.getItem('todo-list') ?? "[]") as Todo[], sortBy);
+  const todos = sort(JSON.parse(localStorage.getItem('todo-list') ?? "[]") as ITodo[], sortBy);
 
   let todoList = {
     originalList: todos, 
@@ -34,7 +36,7 @@ function getTodos() {
       startIndex: 0,
       endIndex: 5,
       itemsPerPage: 5
-    } as Paging
+    } as IPaging
   };
   return todoList;
 }
@@ -62,7 +64,7 @@ export function useTodoListDispatch() {
   return useContext(TodosDispatchContext);
 }
 
-function todoListReducer(todoList: TodoList, action: any) {
+function todoListReducer(todoList: ITodoList, action: any) {
   switch (action.type) {
     case 'added': {
       const newTodo = {
@@ -71,7 +73,7 @@ function todoListReducer(todoList: TodoList, action: any) {
         description: action.description,
         completed: false, 
         createdAt: new Date()
-      } as Todo;
+      } as ITodo;
 
       return {
         ...todoList,
@@ -83,8 +85,8 @@ function todoListReducer(todoList: TodoList, action: any) {
           activePage: calculateActivePageOnAdd(todoList.paging),
           startIndex: (calculateActivePageOnAdd(todoList.paging) - 1) * todoList.paging.itemsPerPage,
           endIndex: calculateActivePageOnAdd(todoList.paging) * todoList.paging.itemsPerPage
-        } as Paging
-      } as TodoList;
+        } as IPaging
+      } as ITodoList;
     }
     case 'changed': {
       return {
@@ -104,7 +106,7 @@ function todoListReducer(todoList: TodoList, action: any) {
           }
         }),
         paging: {...todoList.paging}
-      } as TodoList;
+      } as ITodoList;
     }
     case 'deleted': {
       return {
@@ -117,8 +119,8 @@ function todoListReducer(todoList: TodoList, action: any) {
           activePage: calculateActivePageOnDelete(todoList.paging),
           startIndex: (calculateActivePageOnDelete(todoList.paging) - 1) * todoList.paging.itemsPerPage,
           endIndex: calculateActivePageOnDelete(todoList.paging) * todoList.paging.itemsPerPage,  
-        } as Paging
-      } as TodoList;
+        } as IPaging
+      } as ITodoList;
     }
     case 'paging-updated': {
       return {
@@ -129,7 +131,7 @@ function todoListReducer(todoList: TodoList, action: any) {
           itemPerPage: action.itemsPerPage,
           startIndex: (action.activePage - 1) * action.itemsPerPage,
           endIndex: action.activePage * action.itemsPerPage
-        } as Paging
+        } as IPaging
       }
     }
     case 'searched': {
@@ -145,7 +147,7 @@ function todoListReducer(todoList: TodoList, action: any) {
           totalCount: searchedList.length,
           startIndex: (action.activePage - 1) * todoList.paging.itemsPerPage,
           endIndex: action.activePage * todoList.paging.itemsPerPage
-        } as Paging
+        } as IPaging
       }
     }
     case 'searchTerm-updated': {
@@ -167,7 +169,7 @@ function todoListReducer(todoList: TodoList, action: any) {
           totalCount: searchedList.length,
           startIndex: (action.activePage - 1) * todoList.paging.itemsPerPage,
           endIndex: action.activePage * todoList.paging.itemsPerPage
-        } as Paging
+        } as IPaging
       }
     }
     case 'sorted': {
@@ -179,7 +181,26 @@ function todoListReducer(todoList: TodoList, action: any) {
         ...todoList,
         displayList: [...sortedList],
         sort: {...action.sort},
-        paging: {...todoList.paging} as Paging
+        paging: {...todoList.paging} as IPaging
+      }
+    }
+    case 'imported': {
+      return {
+        ...todoList,
+        originalList: [...action.originalList],
+        displayList: [...action.originalList],
+        search: { searchTerm: '' },
+        filter: {
+          completed: false,
+          uncompleted: false
+         },
+        paging: {
+          ...todoList.paging,
+          activePage: action.activePage,
+          totalCount: action.originalList.length,
+          startIndex: (action.activePage - 1) * todoList.paging.itemsPerPage,
+          endIndex: action.activePage * todoList.paging.itemsPerPage
+        } as IPaging
       }
     }
     default: {
@@ -188,11 +209,11 @@ function todoListReducer(todoList: TodoList, action: any) {
   }
 }
 
-function search(list: Todo[], searchTerm: string,) {
+function search(list: ITodo[], searchTerm: string,) {
   let filteredList = list;
 
   if (searchTerm !== '') {
-    filteredList = list.filter((todo: Todo) => 
+    filteredList = list.filter((todo: ITodo) => 
       todo.title.trim()
                 .toLocaleLowerCase()
                 .includes(searchTerm.trim()
@@ -206,7 +227,7 @@ function search(list: Todo[], searchTerm: string,) {
   return filteredList;
 }
 
-function filter(list: Todo[], filter: any = null) {
+function filter(list: ITodo[], filter: any = null) {
   let filteredList = list;
 
   if (filter && filter.completed && filter.uncompleted) {
@@ -214,17 +235,17 @@ function filter(list: Todo[], filter: any = null) {
   }
 
   if (filter?.completed) {
-    filteredList = filteredList.filter((todo: Todo) => todo.completed === true);
+    filteredList = filteredList.filter((todo: ITodo) => todo.completed === true);
   }
 
   if (filter?.uncompleted) {
-    filteredList = filteredList.filter((todo: Todo) => todo.completed === false);
+    filteredList = filteredList.filter((todo: ITodo) => todo.completed === false);
   }
 
   return filteredList;
 }
 
-function sort(list: Todo[], sort: any) {
+function sort(list: ITodo[], sort: any) {
   let sortResult = [];
   
   if (sort.column === 'createdAt') {
@@ -246,12 +267,12 @@ function sort(list: Todo[], sort: any) {
   return sortResult;
 }
 
-function calculateActivePageOnDelete(paging: Paging) {
+function calculateActivePageOnDelete(paging: IPaging) {
   return Math.ceil((paging.totalCount - 1) / paging.itemsPerPage) < paging.activePage
     ? paging.activePage - 1 : paging.activePage;
 }
 
-function calculateActivePageOnAdd(paging: Paging) {
+function calculateActivePageOnAdd(paging: IPaging) {
   return Math.ceil((paging.totalCount + 1) / paging.itemsPerPage) > paging.activePage
     ? Math.ceil((paging.totalCount + 1) / paging.itemsPerPage) : paging.activePage;
 }
