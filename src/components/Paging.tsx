@@ -100,9 +100,9 @@ export function Paging() {
                   inputRef.current.focus();
                 }} 
               />
-              <Pagination.Ellipsis disabled={true} key="eli-1" />
+              <Pagination.Ellipsis disabled={true} key="left-separator" />
               {pages}
-              <Pagination.Ellipsis disabled={true} key="eli-2" />
+              <Pagination.Ellipsis disabled={true} key="right-separator" />
               <Pagination.Next
                 key="next" 
                 disabled={todoList.paging.activePage === pageCount}

@@ -44,10 +44,10 @@ export function ImportExport() {
 
       if ((importedTodoList.length > 0 
           && (!(importedTodoList[0] instanceof Todo) 
-              || !(Todo.validateFields(importedTodoList[0]))
+           || !(Todo.validateFields(importedTodoList[0]))
               )
           )) {
-        alert("Invalid JSON file content. Object in array are not valid Todo objects.");
+        alert("Invalid JSON file content. Objects in array are not valid Todo objects.");
         return;
       }
             
@@ -64,7 +64,7 @@ export function ImportExport() {
   };
 
   return (
-    <Form className="App__import-export todo-background p-1">
+    <Form className="todo-background p-1">
       <Container fluid>
         <Row xs={1} sm={3}>
           <Col sm={8} className="p-2">

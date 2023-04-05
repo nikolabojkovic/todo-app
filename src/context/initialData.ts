@@ -2,7 +2,7 @@ import { ITodo } from "../models/Todo";
 import { IPaging } from "../models/IPaging";
 import { ITodoList } from "../models/ITodoList";
 
-const data: ITodo[] = [
+export const todos: ITodo[] = [
   {
     id: 1,
     title: "Task 1",
@@ -49,8 +49,8 @@ const data: ITodo[] = [
 
 export const initTodoList: ITodoList = 
 {
-  originalList: data,
-  displayList: data,
+  originalList: todos,
+  displayList: todos,
   search: { searchTerm: '' },
   filter: { completed: false, uncompleted: false },
   sort: { column: 'createdAt', direction: 'asc'},
