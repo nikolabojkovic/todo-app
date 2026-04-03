@@ -11,7 +11,9 @@ import {
   PaginationType,
   ITodo,
   ISort,
-  SortDirection
+  SortDirection,
+  BackgroundColor,
+  BsThemes
 } from '../models';
 
 export enum DisplayMode {
@@ -81,7 +83,14 @@ export class State implements IState {
         pagination: {
           paginationType: PaginationType.Classic,
           maxVisiblePages: 3
-        } as IPaginationSettings
+        } as IPaginationSettings,
+        theme: {
+          backgroundColor: BackgroundColor.DarkGray,
+          primaryColor: '#ff9900',
+          bsTheme: BsThemes.Dark,
+          primaryColorTopCord: -35,
+          primaryColorLefCord: 81
+        }
       } as ISettings;
       this.activeTab = 'add-todo';
 		}

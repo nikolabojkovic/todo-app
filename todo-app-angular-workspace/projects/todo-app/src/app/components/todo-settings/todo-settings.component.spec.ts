@@ -48,6 +48,7 @@ describe('TodoSettingsComponent', () => {
     store = TestBed.inject(Store);
     fixture = TestBed.createComponent(TodoSettingsComponent);
     component = fixture.componentInstance;
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     spyOn(store, 'dispatch').and.callFake(() => {});
     fixture.detectChanges();
   });

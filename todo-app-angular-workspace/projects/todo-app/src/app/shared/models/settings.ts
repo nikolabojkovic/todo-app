@@ -2,6 +2,7 @@ export interface ISettings {
 	general: IGeneralSettings;
 	search: ISearchSettings;
 	pagination: IPaginationSettings;
+	theme: IThemeSettings;
 }
 
 export interface IGeneralSettings {
@@ -30,4 +31,27 @@ export enum PaginationType {
 export enum ListContainerType {
 	Fixed = 'Fixed',
 	Dynamic = 'Dynamic'
+}
+
+// Theme related
+export interface IThemeSettings {
+	backgroundColor: BackgroundColor;
+	primaryColor: string; // hex
+	bsTheme: BsThemes;
+	primaryColorTopCord: number;
+	primaryColorLefCord: number;
+}
+
+export enum BackgroundColor {
+	DarkGray = 'DarkGray',
+	DarkBlue = 'DarkBlue',
+	DarkRed = 'DarkRed',
+	LightGray = 'LightGray',
+	LightBlue = 'LightBlue',
+	LightRed = 'LightRed'
+}
+
+export enum BsThemes {
+	Dark = 'dark',
+	Light = 'light'
 }

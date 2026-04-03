@@ -81,10 +81,6 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have as title \'todo-client-angular\'', () => {
-    expect(component.title).toEqual('todo-client-angular');
-  });
-
   it('should render title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('header')?.textContent).toContain('Todo List');

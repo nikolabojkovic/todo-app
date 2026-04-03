@@ -1,6 +1,8 @@
 @import "./app/shared/style/bootstrap-override.scss";
 @import "./app/shared/style/veriables.scss";
 @import "./app/shared/style/angular-material.overrides.scss";
+@import "./app/shared/style/animations.scss";
+@import "./app/shared/style/themes.scss";
 
 html {
   background-color: $background-primary-color;
@@ -276,6 +278,15 @@ code {
           padding: 0px;
           text-align: right;
         }
+      }
+    }
+
+     &__theme {
+      &__background-color-item {
+        border: 1px solid #B5B2B2;        
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
       }
     }
   }
