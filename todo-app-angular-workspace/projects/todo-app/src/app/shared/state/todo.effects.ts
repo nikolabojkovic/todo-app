@@ -190,7 +190,11 @@ export class TodoEffects {
   saveSettings$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoListActions.settingsUpdated),
-      exhaustMap((action) => this.settingsService.saveSettings(action.payload).pipe(first()))
+      tap((action) => console.log('Settings update action:', action.payload)),
+      exhaustMap((action) => this.settingsService.saveSettings(action.payload).pipe(
+        first(),
+        tap(() => console.log('Settings saved to storage'))
+      ))
     ),
     { dispatch: false }
   );

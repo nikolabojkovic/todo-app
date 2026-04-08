@@ -19,6 +19,7 @@ export class ThemeSettingsComponent implements OnInit {
 
   primaryTop = 0;
   primaryLeft = 0;
+  selectedPrimaryColor = '#0d6efd';
 
   // full list of color areas copied from React ThemeSettings to ensure all coords are available
   areas = [
@@ -159,6 +160,7 @@ export class ThemeSettingsComponent implements OnInit {
         this.settings = settings;
         this.primaryTop = settings.theme.primaryColorTopCord;
         this.primaryLeft = settings.theme.primaryColorLefCord;
+        this.selectedPrimaryColor = settings.theme.primaryColor;
       });
   }
 
@@ -184,9 +186,14 @@ export class ThemeSettingsComponent implements OnInit {
     }));
   }
 
+  isBackgroundSelected(background: BackgroundColor | string): boolean {
+    return this.settings?.theme?.backgroundColor === (background as BackgroundColor);
+  }
+
   changePrimaryColor(color: string, top: number, left: number) {
     this.primaryTop = top;
     this.primaryLeft = left;
+    this.selectedPrimaryColor = color;
     this.store.dispatch(TodoListActions.settingsUpdated({
       payload: {
         ...this.settings,

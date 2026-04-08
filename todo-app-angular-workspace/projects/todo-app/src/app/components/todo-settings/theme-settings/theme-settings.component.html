@@ -2,30 +2,32 @@
   <label class='app__settings__group-label'>Theme</label>
   <div class='app__settings__group__item'>
     <label>Background color:</label>
-    <div class="hstack gap-2 mt-2">
-      <div class="app__settings__theme__background-color-item" id="dark-theme-gray" (click)="changeBackground('DarkGray','dark')"></div>
-      <div class="app__settings__theme__background-color-item" id="dark-theme-blue" (click)="changeBackground('DarkBlue','dark')"></div>
-      <div class="app__settings__theme__background-color-item" id="dark-theme-red" (click)="changeBackground('DarkRed','dark')"></div>
-    </div>
-    <div class="hstack gap-2 mt-2">
-      <div class="app__settings__theme__background-color-item" id="light-theme-gray" (click)="changeBackground('LightGray','light')"></div>
-      <div class="app__settings__theme__background-color-item" id="light-theme-blue" (click)="changeBackground('LightBlue','light')"></div>
-      <div class="app__settings__theme__background-color-item" id="light-theme-red" (click)="changeBackground('LightRed','light')"></div>
+    <div class="hstack gap-5 mt-2 justify-content-center flex-wrap" [style.--selected-primary-color]="selectedPrimaryColor">
+      <div class="hstack gap-2 mt-2">
+        <div class="app__settings__theme__background-color-item" id="dark-theme-gray" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('DarkGray')" (click)="changeBackground('DarkGray','dark')"></div>
+        <div class="app__settings__theme__background-color-item" id="dark-theme-blue" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('DarkBlue')" (click)="changeBackground('DarkBlue','dark')"></div>
+        <div class="app__settings__theme__background-color-item" id="dark-theme-red" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('DarkRed')" (click)="changeBackground('DarkRed','dark')"></div>
+      </div>
+      <div class="hstack gap-2 mt-2">
+        <div class="app__settings__theme__background-color-item" id="light-theme-gray" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('LightGray')" (click)="changeBackground('LightGray','light')"></div>
+        <div class="app__settings__theme__background-color-item" id="light-theme-blue" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('LightBlue')" (click)="changeBackground('LightBlue','light')"></div>
+        <div class="app__settings__theme__background-color-item" id="light-theme-red" [class.app__settings__theme__background-color-item--selected]="isBackgroundSelected('LightRed')" (click)="changeBackground('LightRed','light')"></div>
+      </div>
     </div>
   </div>
   <div class='app__settings__group__item'>
     <label>Primary color:</label>
     <div class="d-flex justify-content-center mt-3">
       <div style="margin:auto; width:236px; position: relative;">
-        <img style="margin-right:2px" src="assets/img_colormap.gif" usemap="#colormap" alt="colormap" />
-        <map id="colormap" name="colormap">
-          <area *ngFor="let a of areas; let i = index" shape="poly" [attr.coords]="a.coords" (click)="selectArea(a)" style="cursor: pointer"/>
-        </map>
-        <div id="selectedhexagon"
-             style="position:relative;width:21px;height:21px;background-image:url('assets/img_selectedcolor.gif');visibility:visible"
-             [style.top.px]="primaryTop"
-             [style.left.px]="primaryLeft"></div>
+        <div class="colormap-wrapper">
+          <img class="colormap-image" src="assets/img_colormap.gif" usemap="#colormap" alt="colormap" />
+          <map id="colormap" name="colormap">
+            <area *ngFor="let a of areas; let i = index" shape="poly" [attr.coords]="a.coords" (click)="selectArea(a)" style="cursor: pointer"/>
+          </map>
+          <div id="selectedhexagon" class="selectedhexagon" [style.top.px]="primaryTop" [style.left.px]="primaryLeft"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+

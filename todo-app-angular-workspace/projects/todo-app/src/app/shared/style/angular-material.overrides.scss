@@ -16,6 +16,21 @@ $my-theme: mat.define-dark-theme((
 
 @include mat.all-component-themes($my-theme);
 
+// Override slide-toggle to use the dynamic primary color
+.mdc-switch--selected .mdc-switch__handle::after {
+  background: var(--text-secondary-color) !important;
+}
+
+.mdc-switch--selected .mdc-switch__track::after {
+  background: var(--text-secondary-color) !important;
+  opacity: 0.38;
+}
+
+.mdc-switch--selected:hover .mdc-switch__ripple::after,
+.mdc-switch--selected:focus .mdc-switch__ripple::after {
+  background: var(--text-secondary-color) !important;
+}
+
 
 .drag-list {
   cursor: grab;
@@ -33,7 +48,7 @@ $my-theme: mat.define-dark-theme((
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
 
   .app__todo-list__item {
-    background-color: $background-secondary-color-1;
+    background-color: var(--background-secondary-color)-1;
     cursor: grabbing;
 
     &:hover {
@@ -59,12 +74,12 @@ $my-theme: mat.define-dark-theme((
   cursor: grabbing;
 
   .app__todo-list__item:hover {
-    background-color: $background-secondary-color;
+    background-color: var(--background-secondary-color);
   }
 }
 
 .drag-custom-placeholder {
-  background: $background-primary-color;
+  background: var(--background-primary-color);
   border: transparent;
   min-height: 55px;
   transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);

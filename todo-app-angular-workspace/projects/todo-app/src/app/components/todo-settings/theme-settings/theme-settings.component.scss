@@ -1,4 +1,35 @@
-
 #selectedhexagon {
+  background-size: cover;
+}
+
+.app__settings__theme__background-color-item {
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+  &--selected {
+    box-shadow: 0 0 0 2px var(--selected-primary-color, var(--bs-primary, #0d6efd)), 0 0 0 4px rgba(0, 0, 0, 0.35);
+    transform: translateY(-1px);
+  }
+}
+
+.colormap-wrapper {
+  margin: auto;
+  width: 236px;
+  position: relative;
+  display: block;
+}
+
+.colormap-image {
+  margin-right: 2px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.selectedhexagon {
+  position: relative;
+  width: 21px;
+  height: 21px;
+  background-image: url('/assets/img_selectedcolor.gif');
+  visibility: visible;
   background-size: cover;
 }

@@ -11,6 +11,7 @@ import {
   TodoListActions
 } from './shared/state';
 import { IThemeSettings } from './shared/models';
+import { applyTheme } from './shared/utils';
 import {
   PagingComponent,
   SortingComponent,
@@ -47,9 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.store.dispatch(TodoListActions.pagingFetch());
     this.store.dispatch(TodoListActions.loadApp());
 
-    this.settingsSubscription = this.store.select(selectSettings).subscribe((settings) => {
-      if (settings && settings.theme) {
-        this.applyTheme(settings.theme as IThemeSettings);
+    this.settingsSubscription = this.store.select(selectSettings).subscribe({
+      next: (settings) => {
+        if (settings && settings.theme) {
+          this.applyTheme(settings.theme as IThemeSettings);
+        }
       }
     });
   }
@@ -61,30 +64,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private applyTheme(theme: IThemeSettings) {
-    console.log('Applying theme:', theme);
-    try {
-      if (theme.primaryColor) {
-        document.documentElement.style.setProperty('--bs-primary', theme.primaryColor);
-      }
-      if (theme.bsTheme) {
-        document.documentElement.setAttribute('data-bs-theme', theme.bsTheme);
-      }
-      // optional: map BackgroundColor to background hex values for body
-      const bgMap: Record<string, string> = {
-        DarkGray: '#121212',
-        DarkBlue: '#0b3d91',
-        DarkRed: '#3b0000',
-        LightGray: '#ffffff',
-        LightBlue: '#e9f4ff',
-        LightRed: '#fff0f0'
-      };
-      const bgKey = (theme as unknown as { backgroundColor?: string }).backgroundColor;
-      if (bgKey) {
-        const bg = bgMap[bgKey] ?? '';
-        document.body.style.background = bg;
-      }
-    } catch (e) {
-      // ignore in non-browser environments
-    }
+    const root = document.querySelector(':root') as HTMLElement;
+    applyTheme(theme, root);
+    document.documentElement.setAttribute('data-bs-theme', theme.bsTheme);
   }
 }
