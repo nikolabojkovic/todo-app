@@ -43,9 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store<IState>) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(TodoListActions.fetch());
-    // this.store.dispatch(TodoListActions.settingsFetch());
-    // this.store.dispatch(TodoListActions.pagingFetch());
     this.store.dispatch(TodoListActions.loadApp());
 
     this.settingsSubscription = this.store.select(selectSettings).subscribe({

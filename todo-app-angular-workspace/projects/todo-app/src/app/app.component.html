@@ -1,4 +1,4 @@
-<main class="app" data-bs-theme="dark">
+<main class="app" [attr.data-bs-theme]="(settings$ | async)?.theme?.bsTheme">
   <header class="app-header">
     Todo List
   </header>

@@ -19,3 +19,8 @@ npm install --save-dev ts-node nodemon // cold watch, run without waiting typesr
 // angular 
 link local npm package
 command example: npm install "file://./dist//sort-button" 
+
+// notes:
+
+- share theme as a plugin package, then import it in the app and apply it to the root element. This way we can have a consistent theme across the app and also make it easy to update the theme in the future.
+- trasnfere other functionalities from react app into angular app, such as filtering, searching with debounce...
