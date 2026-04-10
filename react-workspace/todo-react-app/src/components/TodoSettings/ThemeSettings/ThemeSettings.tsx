@@ -167,7 +167,7 @@ export function ThemeSettings() {
             <div 
               id="dark-theme-gray"
               data-testid="dark-theme-gray-button"
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.DarkGray ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
@@ -185,7 +185,7 @@ export function ThemeSettings() {
             <div 
               id="dark-theme-blue"
               data-testid="dark-theme-blue-button"
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.DarkBlue ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
@@ -203,7 +203,7 @@ export function ThemeSettings() {
             <div 
               id="dark-theme-red"
               data-testid="dark-theme-red-button"
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.DarkRed ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
@@ -223,7 +223,7 @@ export function ThemeSettings() {
             <div 
               id="light-theme-gray"
               data-testid="light-theme-gray-button"
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.LightGray ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
@@ -241,7 +241,7 @@ export function ThemeSettings() {
             <div 
               id="light-theme-blue"
               data-testid="light-theme-blue-button"
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.LightBlue ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
@@ -259,7 +259,7 @@ export function ThemeSettings() {
             <div 
               id="light-theme-red"
               data-testid="light-theme-red-button" 
-              className="App__settings__theme__background-color-item"
+              className={`App__settings__theme__background-color-item${todoList.settings.theme.backgroundColor === BackgroundColor.LightRed ? ' App__settings__theme__background-color-item--selected' : ''}`}
               onClick={() => {
                 dispatch({
                   type: TodoActions.settingsUpdated,
